@@ -17,7 +17,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private final Map<UUID, Employee> employeeStore = new ConcurrentHashMap<>();
 
     public EmployeeServiceImpl() {
-        // Pre-populate some mock data
+
         EmployeeImpl emp1 = new EmployeeImpl();
         emp1.setUuid(UUID.randomUUID());
         emp1.setFirstName("Jane");
@@ -28,6 +28,18 @@ public class EmployeeServiceImpl implements EmployeeService {
         emp1.setEmail("jane.doe@example.com");
         emp1.setContractHireDate(Instant.now());
         employeeStore.put(emp1.getUuid(), emp1);
+
+        EmployeeImpl emp2 = new EmployeeImpl();
+        emp2.setUuid(UUID.randomUUID());
+        emp2.setFirstName("John");
+        emp2.setLastName("Smith");
+        emp2.setSalary(95000);
+        emp2.setAge(32);
+        emp2.setJobTitle("Backend Developer");
+        emp2.setEmail("john.smith@example.com");
+        emp2.setContractHireDate(Instant.now());
+
+        employeeStore.put(emp2.getUuid(), emp2);
     }
 
     @Override
