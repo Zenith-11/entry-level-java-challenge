@@ -8,21 +8,19 @@ import jakarta.validation.constraints.NotNull;
 public class EmployeeCreateRequest {
     @NotBlank(message = "First name is required")
     private String firstName;
-    
+
     @NotBlank(message = "Last name is required")
     private String lastName;
-    
-    @NotNull(message = "Salary is required")
-    @Min(value = 1, message = "Salary must be positive")
+
+    @NotNull(message = "Salary is required") @Min(value = 1, message = "Salary must be positive")
     private Integer salary;
-    
-    @NotNull(message = "Age is required")
-    @Min(value = 18, message = "Age must be at least 18")
+
+    @NotNull(message = "Age is required") @Min(value = 18, message = "Age must be at least 18")
     private Integer age;
-    
+
     @NotBlank(message = "Job title is required")
     private String jobTitle;
-    
+
     @NotBlank(message = "Email is required")
     @Email(message = "Email must be valid")
     private String email;
