@@ -52,3 +52,49 @@ To format code according to style guidelines, you can run **spotlessApply** task
 
 The spotless plugin will also execute check-and-validation tasks as part of the gradle **build** task.
 `./gradlew build`
+
+## Implementation Details
+
+### How to Run
+Ensure you are using Java 17.
+```bash
+./gradlew bootRun
+```
+The application will start on `http://localhost:8080`.
+
+### Security (Basic Auth)
+This API is protected using Spring Security Basic Authentication. You must include these credentials in your requests:
+- **Username:** `admin`
+- **Password:** `admin123`
+
+### Interactive API Documentation
+You can explore and test the endpoints directly using the built-in Swagger UI:
+- **Swagger UI:** `http://localhost:8080/swagger-ui/index.html`
+
+### Endpoints
+
+#### 1. Get All Employees
+```bash
+curl -X GET http://localhost:8080/api/v1/employee -u admin:admin123
+```
+
+#### 2. Get Employee by UUID
+```bash
+curl -X GET http://localhost:8080/api/v1/employee/<UUID> -u admin:admin123
+```
+
+#### 3. Create Employee
+Expects a JSON body with validation (`firstName`, `lastName`, `jobTitle`, `email` must not be blank, `age` >= 18, `salary` >= 1). Returns HTTP `201 Created` on success.
+```bash
+curl -X POST http://localhost:8080/api/v1/employee \
+  -u admin:admin123 \
+  -H "Content-Type: application/json" \
+  -d '{
+    "firstName": "John",
+    "lastName": "Smith",
+    "salary": 65000,
+    "age": 25,
+    "jobTitle": "Analyst",
+    "email": "jsmith@example.com"
+  }'
+```

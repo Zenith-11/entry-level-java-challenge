@@ -51,7 +51,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee getEmployeeByUuid(UUID uuid) {
         Employee employee = employeeStore.get(uuid);
         if (employee == null) {
-            throw new com.challenge.api.exception.EmployeeNotFoundException("Employee with UUID " + uuid + " not found");
+            throw new com.challenge.api.exception.EmployeeNotFoundException(
+                    "Employee with UUID " + uuid + " not found");
         }
         return employee;
     }

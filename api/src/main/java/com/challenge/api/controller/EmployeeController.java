@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.http.HttpStatus;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/employee")
@@ -30,14 +32,14 @@ public class EmployeeController {
         return employeeService.getAllEmployees();
     }
 
-
     @GetMapping("/{uuid}")
     public Employee getEmployeeByUuid(@PathVariable UUID uuid) {
         return employeeService.getEmployeeByUuid(uuid);
     }
 
     @PostMapping
-    public Employee createEmployee(@RequestBody EmployeeCreateRequest requestBody) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public Employee createEmployee(@Valid @RequestBody EmployeeCreateRequest requestBody) {
         return employeeService.createEmployee(requestBody);
     }
 }
